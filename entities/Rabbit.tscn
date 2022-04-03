@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://entities/Rabbit.gd" type="Script" id=1]
+[ext_resource path="res://entities/Enemy.tscn" type="PackedScene" id=2]
+
+[sub_resource type="SphereShape" id=1]
+radius = 0.4
+
+[sub_resource type="SphereMesh" id=2]
+radius = 0.4
+height = 0.8
+
+[sub_resource type="SphereMesh" id=3]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.580392, 0.145098, 0.0745098, 1 )
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.580392, 0.145098, 0.0745098, 1 )
+
+[sub_resource type="SphereMesh" id=6]
+radius = 0.1
+height = 0.6
+
+[node name="Rabbit" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Model" index="0"]
+mesh = SubResource( 2 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="Model" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.390157 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="MeshInstance3" type="MeshInstance" parent="Model" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.141, -0.25474 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="Model" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.141, -0.25474 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 5 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="Model" index="4"]
+transform = Transform( 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, -0.25422, 0.512368, -0.0561696 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="MeshInstance6" type="MeshInstance" parent="Model" index="5"]
+transform = Transform( 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, 0.254, 0.512, -0.056 )
+mesh = SubResource( 6 )
+skeleton = NodePath("../..")
+material/0 = null

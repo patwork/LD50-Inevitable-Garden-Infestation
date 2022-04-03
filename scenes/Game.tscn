@@ -1,0 +1,306 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://default_env.tres" type="Environment" id=1]
+[ext_resource path="res://models/Garden.gltf" type="PackedScene" id=2]
+[ext_resource path="res://entities/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Game.gd" type="Script" id=4]
+[ext_resource path="res://entities/Rabbit.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/WorldEnvironment.gd" type="Script" id=6]
+[ext_resource path="res://entities/Vegetable.tscn" type="PackedScene" id=7]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 100, 1, 100 )
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( 3, 1.49971, 4.5, 3, -1.5, 4.5, 3, 1.49971, -4.5, 0, 3.5, 4.5, -3, -1.5, 4.5, 3, -1.5, -4.5, 0, 3.5, -4.5, -3, 1.49971, 4.5, -3, -1.5, -4.5, -3, 1.49971, -4.5 )
+
+[node name="Game" type="Spatial"]
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+scene_rabbit = ExtResource( 5 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 1 )
+script = ExtResource( 6 )
+
+[node name="Sun" type="DirectionalLight" parent="WorldEnvironment"]
+transform = Transform( 0.707107, -0.5, -0.5, 0, -0.707107, 0.707107, -0.707107, -0.5, -0.5, 0, 10, 0 )
+shadow_enabled = true
+shadow_color = Color( 0.392157, 0.552941, 0.827451, 1 )
+
+[node name="Level" type="Spatial" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Garden" parent="Level" instance=ExtResource( 2 )]
+
+[node name="StaticBody" type="StaticBody" parent="Level"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Level/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Level/StaticBody"]
+transform = Transform( 0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, -30, 1.5, -5 )
+shape = SubResource( 2 )
+
+[node name="Navigation" type="Spatial" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SpawnRabbits" type="Spatial" parent="Navigation"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Spawn01" type="Position3D" parent="Navigation/SpawnRabbits"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5158, 1, -18.3412 )
+
+[node name="Spawn02" type="Position3D" parent="Navigation/SpawnRabbits"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3596, 1, -9.24314 )
+
+[node name="Spawn03" type="Position3D" parent="Navigation/SpawnRabbits"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.47005, 1, 17.7409 )
+
+[node name="Spawn04" type="Position3D" parent="Navigation/SpawnRabbits"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3768, 1, 11.3309 )
+
+[node name="SprawnWasps" type="Spatial" parent="Navigation"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Spawn01" type="Position3D" parent="Navigation/SprawnWasps"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -47.7424 )
+
+[node name="Entities" type="Spatial" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Rabbits" type="Spatial" parent="Entities"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Wasps" type="Spatial" parent="Entities"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Vegetables" type="Spatial" parent="Entities"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Vegetable" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -9 )
+
+[node name="Vegetable2" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -9 )
+
+[node name="Vegetable3" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -9 )
+
+[node name="Vegetable4" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -9 )
+
+[node name="Vegetable5" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9 )
+
+[node name="Vegetable6" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -9 )
+
+[node name="Vegetable7" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -9 )
+
+[node name="Vegetable8" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -9 )
+
+[node name="Vegetable9" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -9 )
+
+[node name="Vegetable10" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -6 )
+
+[node name="Vegetable11" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -6 )
+
+[node name="Vegetable12" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -6 )
+
+[node name="Vegetable13" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6 )
+
+[node name="Vegetable14" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
+
+[node name="Vegetable15" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6 )
+
+[node name="Vegetable16" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -6 )
+
+[node name="Vegetable17" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6 )
+
+[node name="Vegetable18" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -6 )
+
+[node name="Vegetable19" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -3 )
+
+[node name="Vegetable20" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -3 )
+
+[node name="Vegetable21" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -3 )
+
+[node name="Vegetable22" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3 )
+
+[node name="Vegetable23" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3 )
+
+[node name="Vegetable24" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3 )
+
+[node name="Vegetable25" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -3 )
+
+[node name="Vegetable26" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -3 )
+
+[node name="Vegetable27" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -3 )
+
+[node name="Vegetable28" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0 )
+
+[node name="Vegetable29" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0 )
+
+[node name="Vegetable30" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
+
+[node name="Vegetable31" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
+
+[node name="Vegetable32" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+
+[node name="Vegetable33" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+
+[node name="Vegetable34" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0 )
+
+[node name="Vegetable35" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0 )
+
+[node name="Vegetable36" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
+
+[node name="Vegetable37" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 3 )
+
+[node name="Vegetable38" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 3 )
+
+[node name="Vegetable39" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3 )
+
+[node name="Vegetable40" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3 )
+
+[node name="Vegetable41" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3 )
+
+[node name="Vegetable42" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3 )
+
+[node name="Vegetable43" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3 )
+
+[node name="Vegetable44" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3 )
+
+[node name="Vegetable45" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 3 )
+
+[node name="Vegetable46" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 6 )
+
+[node name="Vegetable47" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6 )
+
+[node name="Vegetable48" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6 )
+
+[node name="Vegetable49" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6 )
+
+[node name="Vegetable50" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6 )
+
+[node name="Vegetable51" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6 )
+
+[node name="Vegetable52" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6 )
+
+[node name="Vegetable53" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6 )
+
+[node name="Vegetable54" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 6 )
+
+[node name="Vegetable55" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 9 )
+
+[node name="Vegetable56" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 9 )
+
+[node name="Vegetable57" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 9 )
+
+[node name="Vegetable58" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 9 )
+
+[node name="Vegetable59" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9 )
+
+[node name="Vegetable60" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 9 )
+
+[node name="Vegetable61" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 9 )
+
+[node name="Vegetable62" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 9 )
+
+[node name="Vegetable63" parent="Entities/Vegetables" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 9 )
+
+[node name="Items" type="Spatial" parent="Entities"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" parent="Entities" instance=ExtResource( 3 )]
+transform = Transform( 0.592941, 0, -0.805246, 0, 1, 0, 0.805246, 0, 0.592941, -29.0529, 0.93236, 6.15166 )
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="GameTimer" type="Timer" parent="Timers"]
+
+[node name="SpawnTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[connection signal="timeout" from="Timers/GameTimer" to="." method="_on_GameTimer_timeout"]
