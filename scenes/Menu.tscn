@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/Menu.gd" type="Script" id=2]
+[ext_resource path="res://entities/Rabbit.tscn" type="PackedScene" id=3]
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+margin_right = 1600.0
+margin_bottom = 900.0
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+anchor_bottom = 1.0
+margin_right = 795.0
+margin_bottom = -198.0
+text = "Inevitable
+Garden
+Infestation"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -106.0
+text = "press space to play"
+align = 1
+valign = 1
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Spatial" type="Spatial" parent="CanvasLayer2"]
+
+[node name="Camera" type="Camera" parent="CanvasLayer2/Spatial"]
+transform = Transform( -0.895059, 0.0611081, -0.441741, 1.22514e-08, 0.990567, 0.13703, 0.445948, 0.12265, -0.886616, 0, 0.315374, -1.41604 )
+current = true
+fov = 64.4
+
+[node name="Rabbit" parent="CanvasLayer2/Spatial" instance=ExtResource( 3 )]
+script = null

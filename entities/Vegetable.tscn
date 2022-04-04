@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://entities/Vegetable.gd" type="Script" id=1]
 
 [sub_resource type="SphereShape" id=1]
 radius = 0.2
@@ -8,9 +10,97 @@ radius = 0.2
 height = 0.4
 
 [sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.952941, 0.698039, 0.0901961, 1 )
+albedo_color = Color( 0.984314, 0.494118, 0.0196078, 1 )
 
-[node name="Vegetable" type="StaticBody"]
+[sub_resource type="SphereMesh" id=4]
+radius = 0.02
+height = 0.8
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.176471, 0.403922, 0.164706, 1 )
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Model/Leaf1:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -11.292, 1.08434e-07, 4.878 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Model/Leaf2:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -2.87537, 3.45431, -12.8685 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Model/Leaf3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1.015, 1.4087e-07, 4.878 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "wiggle"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Model/Leaf1:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -11.292, 1.08434e-07, 4.878 ), Vector3( -12.292, 0, 4.878 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Model/Leaf2:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -2.87537, 3.45431, -12.8685 ), Vector3( -2.875, 3.454, -11.869 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Model/Leaf3:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1.015, 1.4087e-07, 4.878 ), Vector3( 1.015, 0, 5.878 ) ]
+}
+
+[node name="Vegetable" type="StaticBody" groups=["veggies"]]
+script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
@@ -18,6 +108,39 @@ shape = SubResource( 1 )
 [node name="Model" type="Spatial" parent="."]
 
 [node name="MeshInstance" type="MeshInstance" parent="Model"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000695944, -0.000397682, 0.0107844 )
 mesh = SubResource( 2 )
 skeleton = NodePath("../../CollisionShape")
 material/0 = SubResource( 3 )
+
+[node name="Leaf1" type="Spatial" parent="Model"]
+transform = Transform( 0.996378, -0.0850343, 1.8559e-09, 0.0833883, 0.97709, 0.195809, -0.0166505, -0.1951, 0.980642, -0.0214005, 0.144863, -0.0375409 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Model/Leaf1"]
+transform = Transform( 1, -6.28643e-09, -1.86265e-09, -1.3737e-08, 1, 0, 0, 0, 1, 0.0120799, 0.395054, 0.0283655 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 5 )
+
+[node name="Leaf2" type="Spatial" parent="Model"]
+transform = Transform( 0.973786, 0.219364, 0.0601768, -0.222434, 0.973656, 0.0501636, -0.0475874, -0.0622339, 0.996926, 0.0549105, 0.144863, -0.00507152 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Model/Leaf2"]
+transform = Transform( 1, -2.30502e-08, -7.45058e-09, 6.51926e-09, 1, 0, 0, -7.45058e-09, 1, -0.0322225, 0.394557, 0.00726683 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 5 )
+
+[node name="Leaf3" type="Spatial" parent="Model"]
+transform = Transform( 0.996378, -0.0850343, 2.45825e-09, 0.085021, 0.996222, -0.0177142, 0.00150631, 0.01765, 0.999843, -0.0150552, 0.144863, 0.0345905 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Model/Leaf3"]
+transform = Transform( 1, 1.02464e-08, 0, 1.76587e-08, 1, 0, 1.16415e-10, 0, 1, 0.0123164, 0.397825, -0.00256613 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "wiggle"
+anims/RESET = SubResource( 6 )
+anims/wiggle = SubResource( 7 )
